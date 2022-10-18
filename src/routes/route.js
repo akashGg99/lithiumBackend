@@ -111,31 +111,38 @@ router.get('/films/:filmid', function (req, res){
         id: 4,
         name: "Finding Nemo"
        }];
-       
 
+       
+       //Using If else
         for(let i=0;i<ArrMovies.length;i++){
              if(ArrMovies[i].id == req.params.filmid){
                 
                 res.send(ArrMovies[i])
               }
-              else{"Movie does not exixt."}
+              else{
+                res.send("Movie does not exixt.")
+              }
             } 
            
 
 
-            
+
+
+
 
     //    //Using find
-    //    const filamid = req.params.filmid
-    //   const filmovies = ArrMovies.find(filamid =>filamid == ArrMovies[filamid].id)
-    //   if(filmovies){
-    //     res.send(filmovies)
+    //    const inputID = req.params.filmid
+    //   const found = ArrMovies.find(ArrMovies.id =>inputID == ArrMovies[inputID].id)
+    //   if(found){
+    //     res.send(found)
     //   }else{
     //     res.send("No such movie exists.")
     //   }
 
 
 
+
+        //// With map
         // ArrMovies.map((elem,index) => {
         //     if(index==req.params.filmid){
         //         res.send(elem)
@@ -147,7 +154,7 @@ router.get('/films/:filmid', function (req, res){
 
 
 
-
+        // //others code
         // // let count = 0
         // for(let i=0;i<ArrMovies.length;i++){
         //      if(ArrMovies[i].id == req.params.filmid){
