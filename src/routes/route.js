@@ -115,6 +115,7 @@ router.get('/films/:filmid', function (req, res){
        
        //Using If else
         for(let i=0;i<ArrMovies.length;i++){
+            
              if(ArrMovies[i].id == req.params.filmid){
                 
                 res.send(ArrMovies[i])
