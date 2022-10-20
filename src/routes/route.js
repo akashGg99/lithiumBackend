@@ -160,4 +160,107 @@ router.post( "/post-query-2", function (req, res){
 })
 
 
+
+
+
+
+
+
+
+
+
+
+
+//.......... VOTING ASSIGNMENT .........................
+//.................................. Assignment Post Lunch  W4D4 - Using query params for taking input .......................................
+
+
+
+
+let persons= [
+    {
+    name: "PK",
+    age: 10,
+    votingStatus: false
+ },
+ {
+    name: "SK",
+    age: 20,
+    votingStatus: false
+ },
+ {
+    name: "AA",
+    age: 70,
+    votingStatus: false
+ },
+ {
+    name: "SC",
+    age: 5,
+    votingStatus: false
+ },
+ {
+    name: "HO",
+    age: 40,
+    votingStatus: false
+ }
+ ]
+
+
+//api
+
+ router.post('/age', function(req,res) {
+
+    let votingAge=req.query.votingAge
+    let array=[]
+
+   persons.forEach((persons)=> {
+
+        if(persons.age >= votingAge) {
+                persons.votingStatus=true
+                array.push(persons)
+        }
+    })
+    res.send({data : array})
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Other method not working
+ router.post('/voting' , function(req, res) {
+
+    //We will be taking input with query params so..
+    let validAge = req.query.votingAge
+    let filterAge = persons.filter( ele => ele.age > validAge);
+    let trueArr = filterAge.map( x => x.votingStatus = true);
+
+    console.log(persons)
+    console.log(validAge)
+    console.log(filterAge)
+    console.log(trueArr)
+
+    res.send( { "data" : filterAge} )
+
+
+
+ })
+
+
+
+
+
 module.exports = router;
