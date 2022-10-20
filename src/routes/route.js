@@ -68,6 +68,96 @@ router.post("/test-post-4", function(req, res) {
     let ele= req.body.element
     arr.push(ele)
     res.send(  { msg: arr , status: true }  )
+    
 })
+
+
+
+
+
+
+//.............................. PlayersAssignment .................................
+
+
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ],
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ],
+       },
+   ]
+ 
+
+   router.post('/players', function (req, res) {
+ 
+       //LOGIC WILL COME HERE
+        let newPlayer = req.body
+            // console.log("**", newPlayer)
+
+        for (let i=0; i<players.length;i++) {
+            if (players[i].name == newPlayer.name) {
+                res.send(  { message : "player already exists"} )   
+            }
+        }
+        players.push(newPlayer);
+            
+        res.send(  { data : players} )
+
+   });
+
+
+
+
+
+
+//Method2....
+   router.post('/playerss', function (req, res) {
+ 
+    //LOGIC WILL COME HERE
+    const body = req.body
+    // player name should be unique
+    const player = players.find(x => x.name === body.name)
+    // if no match found... then return undefined/ null ==> false
+    // if match ..will return player => true
+    if(player){
+     res.send({message: "player already exist"})
+    }else{
+     players.push(body)
+     res.send(players)
+    }
+    
+})
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
