@@ -19,7 +19,7 @@ const bookList = async function (req,res) {
 
 
 const getBooksInYear = async function (req, res) {
-    let Inputyear= req.query
+    let Inputyear= req.query.enteredYear
     let filteredData = await BookModel.find({ year: Inputyear})
 
     res.send({msg: filteredData})
@@ -27,14 +27,15 @@ const getBooksInYear = async function (req, res) {
 
 
 const getParticularBooks = async function (req,res) {
-    let filteredData = await BookModel.find( {bookName: /.*hi*./ },{year : 2020} )
+    let inputvalue = req.query.enterValuekey
+    let filteredData = await BookModel.find( {entervaluekey:inputvalue} )
 
-    res.send({msg: Data})
+    res.send({msg: filteredData})
 }
 
 
 const getXINRBooks= async function(req,res) {
-    let filteredData = await BookModel.find( {indianPrice: {$in : [100, 200, 500] }}  )
+    let filteredData = await BookModel.find( {"prices.indianPrice": {$in : ["100", "200", "500"] }}  )
 
     res.send({msg: filteredData})
 }
