@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const newAuthorSchema = new mongoose.Schema( {
-    author_name: String,
-    age: Number,
-    address: String,
-    rating: Number
+    
+   name: String,
+   headQuarter: String
 
 }, { timestamps: true });
 
