@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const newAuthorSchema = new mongoose.Schema( {
-    author_name: String,
+const authorSchema = new mongoose.Schema( {
+    author_name: {type: String, require:true, unique:true},
     age: Number,
     address: String,
     rating: Number

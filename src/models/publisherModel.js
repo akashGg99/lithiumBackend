@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-const newAuthorSchema = new mongoose.Schema( {
-    
-   name: String,
-   headQuarter: String
+const PublisherSchema = new mongoose.Schema({
+        Name:String,
+        HeadQuarter:String,
+},{timestamps:true})
 
-}, { timestamps: true });
+module.exports = mongoose.model("publisher",PublisherSchema) //publishers in DB
 
-module.exports = mongoose.model('newAuthor', authorSchema)  //newauthors in DB
