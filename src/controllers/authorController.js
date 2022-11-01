@@ -3,7 +3,7 @@ const AuthorModel= require("../models/authorModel")
 //1. Write a POST api that creates an author from the details in request body
 
 const createAuthor= async function (req, res) {
-    let author = req.body //which data i will send in body
+    let author = req.body               //which data i will send in body
     let authorCreated = await AuthorModel.create(author)
     res.send({data: authorCreated})
 }

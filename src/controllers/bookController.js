@@ -18,11 +18,11 @@ const createBook= async function (req, res) {
     let id2 = req.body.publisher
     let publisherid = await publisherModel.find({_id:id2})
     if(!id1){
-        res.send("author id is require")
+        res.send("author id is required")
     }else if(authorid.length==0){
      res.send("This Author is not present")
      }else if(!id2){
-        res.send("Publisher id is require")
+        res.send("Publisher id is required")
      }else if(publisherid.length==0){
         res.send("This publisher is not present")
      }else{
