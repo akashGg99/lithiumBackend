@@ -19,6 +19,22 @@ app.use (
         console.log ("inside GLOBAL MW");
         next();
   }
+
+  );
+  app.use (
+    function (req, res, next) {
+        // console.log('Date: ',new Date())
+        const date=new Date();
+        console.log("Date&Time: ", date.getFullYear()+"/"+date.getMonth()+"/"+date.getDate()+" ("
+        + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(),")")
+
+       
+        console.log('IP is: ',req.ip)
+       
+        console.log('Route requested: ',req.url)
+        // console.log ("inside GLOBAL MW");
+        next();
+  }
   );
 
 app.use('/', route);
