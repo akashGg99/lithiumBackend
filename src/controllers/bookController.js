@@ -27,11 +27,12 @@ const getBooksInYear = async function (req, res) {
 
 
 const getParticularBooks = async function (req,res) {
-    let inputvalue = req.query.enterValuekey
-    let filteredData = await BookModel.find( {entervaluekey:inputvalue} )
+    let filteredData = await bookModel.find({bookName:/^The/i})
 
     res.send({msg: filteredData})
 }
+
+    
 
 
 const getXINRBooks= async function(req,res) {
@@ -42,7 +43,7 @@ const getXINRBooks= async function(req,res) {
 
 
 const getRandomBooks= async function (req,res) {
-    let filteredData= await BookModel.find( $or[ {stockAvailable: true} ,{totalPages:{$gt:500}} ] )
+    let filteredData= await BookModel.find( $or[ {stockAvailable: true}, {totalPages:{$gt:500}} ] )
 
     res.send({msg: filteredData})
 }
