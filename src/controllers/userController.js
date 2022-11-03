@@ -1,5 +1,25 @@
 const UserModel= require("../models/userModel")
 
+const createUser1= async function (req, res) {
+    let data= req.body
+    // let headerdata= req.headers["isFreeAppUser"]
+    let newuser= await UserModel.create(data)
+    // console.log(headerdata)
+    res.send({msg: newuser})
+}
+
+
+
+module.exports.createUser1 = createUser1
+
+
+
+
+
+
+
+
+
 
 
 

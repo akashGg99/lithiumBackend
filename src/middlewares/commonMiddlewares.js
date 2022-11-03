@@ -1,4 +1,44 @@
 
+
+
+
+//Validation 1, to check if header has isFreeAppUser or not
+
+
+const validation1 =function(req,res,next) {
+    let headerValue= req.headers["isfreeappuser"]
+
+    if (headerValue) {
+        headerValuePresent= true;
+        next();
+    }
+    else {
+        headerValuePresent = false;
+        res.send("ERROR: No isFreeHeader Provided");
+    }
+    
+}
+
+
+
+
+module.exports.validation1= validation1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const mid1= function ( req, res, next) {
     req.falana= "hi there. i am adding something new to the req object"
     console.log("Hi I am a middleware named Mid1")
