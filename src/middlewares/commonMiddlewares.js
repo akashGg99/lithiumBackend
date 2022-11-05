@@ -1,7 +1,4 @@
 
-
-
-
 //Validation 1, to check if header has isFreeAppUser or not
 
 

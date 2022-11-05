@@ -26,14 +26,15 @@ const createOrder1= async function (req,res) {
             else {
 
                 //first checking if user has enough balance
-                if(searchUser.balance){
+                if(searchUser.balance > req.body.amount){
 
-                //deduct amount from users balance ,
+                //deducting amount from users balance ,
                 let updateBal= await userModel.findByIdAndUpdate(userId, {$inc: {balance: -req.body.amount},new:true})
                 let newEntry2 = await OrderModel.create(req.body)
                 return res.send({status:"Amount Charged",msg: newEntry2})  
                 }
-                else{
+                else
+                {
                     return res.send({msg:"User Balance low."})
                 }
             }
