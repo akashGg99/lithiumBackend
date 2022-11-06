@@ -9,14 +9,14 @@ const createOrder1= async function (req,res) {
 
     let isfreeappuserORNOT = req.headers.isfreeappuser    //storing value from header
     //Converting String value "true" to boolean t/f
-    isfreeappuserORNOT.toLowerCase()=="true"? true:false;
+    isfreeappuserORNOT = isfreeappuserORNOT.toLowerCase()=="true"? true:false;
     console.log(isfreeappuserORNOT)
     let searchUser= await userModel.findById(userId)
     let searchProd= await productModel.findById(productId)
         //User&Product Validation ----P3 to see if user,prod exists in db or not.
         if(searchUser && searchProd) {
 
-            if(isfreeappuserORNOT==true){
+            if(isfreeappuserORNOT){
 
                 //make the amount 0 for freeUser in req.body data
                 req.body.amount = 0

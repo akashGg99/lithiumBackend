@@ -17,7 +17,7 @@ router.post("/create-user", commonMW.validation1, UserController.createUser1)
 router.post("/create-product", commonMW.validation1, productController.createProduct1)
 
 //3. create order
-router.post("/create-order",  orderController.createOrder1)
+router.post("/create-order", commonMW.validation1,  orderController.createOrder1)
 
 
 
