@@ -22,6 +22,7 @@ const loginUser = async function (req, res) {
       msg: "username or the password is not corerct",
     });
 
+    
   let token = jwt.sign(
       { userId: user._id.toString(),
         batch: "lithium",
@@ -59,35 +60,25 @@ const getUserData = async function (req, res) {
 };
 
 
+
 //4
-
-
-
-
-
-
-
-const updateUser = async function (req, res) {
-  // Do the same steps here:
-  // Check if the token is present
-  // Check if the token present is a valid token
-  // Return a different error message in both these cases
-
-  let userId = req.params.userId;
-  let user = await userModel.findById(userId);
-  //Return an error if no user with the given id exists in the db
-  if (!user) {
-    return res.send("No such user exists");
+const markAsDelete = async function (req, res) {
+    const token = req.headers["x-auth-token"]
+    if (!token){
+       return res.send({ status: false, msg: "Token must be present" })}
+  
+    const decodedToken = jwt.verify(token, "SecretCode")
+    if (!decodedToken){ 
+      return res.send({ status: false, msg: "Token is invalid" })}
+  
+    const data = req.body
+    const updateIsDelete = await userModel.findOneAndUpdate({ _id: userId }, data, { new: true })
+    return res.send({ status: true, data: updateIsDelete })
   }
-
-  let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
-  res.send({ status: updatedUser, data: updatedUser });
-};
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
-module.exports.updateUser = updateUser;
+module.exports.markAsDelete = markAsDelete;
 module.exports.loginUser = loginUser;
 
 
@@ -102,6 +93,8 @@ module.exports.loginUser = loginUser;
 
 
 // -----------------------------------------------------------------
+// //Sabiha ma'am's code
+// -------------------------------------------------------------------
 
 
 
@@ -109,8 +102,6 @@ module.exports.loginUser = loginUser;
 
 
 
-
-// //Sabiha maams code
 // /*
 //   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
 // */
@@ -184,6 +175,7 @@ module.exports.loginUser = loginUser;
 //   res.send({ status: true, data: userDetails });
 //   // Note: Try to see what happens if we change the secret while decoding the token
 // };
+
 
 // const updateUser = async function (req, res) {
 //   // Do the same steps here:
