@@ -2,13 +2,14 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
 
+//1
 const createUser = async function (req, res) {
   let data = req.body;
   let savedData = await userModel.create(data);
   res.send({ msg: savedData });
 };
 
-
+//2
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
   let password = req.body.password;
@@ -33,9 +34,7 @@ const loginUser = async function (req, res) {
 };
 
 
-
-
-
+//3
 const getUserData = async function (req, res) {
   let token = req.headers["x-Auth-token"];
   if (!token) token = req.headers["x-auth-token"];
@@ -59,6 +58,8 @@ const getUserData = async function (req, res) {
  
 };
 
+
+//4
 
 
 
