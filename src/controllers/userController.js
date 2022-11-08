@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 
 
 
+try {
 
 //1
 const createUser = async function (req, res) {
@@ -12,14 +13,13 @@ const createUser = async function (req, res) {
 }
 
 
-
 //2
 const loginUser = async function (req, res) {
     const email = req.body.email
     const password = req.body.password
     const user = await userModel.findOne({ email: email, password: password })
     
-    if (!user) return res.send({ status: false, msg: "user is not present in our DB with these credentials" })
+    if (!user) return res.status(401).send({ status: false, msg: "user is not present in our DB with these credentials" })
 
     const token = jwt.sign(
         {
@@ -34,16 +34,16 @@ const loginUser = async function (req, res) {
 //3
 const getUserDetails = async function (req, res) {
     const token = req.headers["x-auth-token"]
-    if (!token) return res.send({ status: false, msg: "Token must be present" })
+    if (!token) return res.status(400).send({ status: false, msg: "Token must be present" })
 
     const decodedToken = jwt.verify(token, "SecretCode")
-    if (!decodedToken) return res.send({ staus: false, msg: "Token is invalid" })
+    if (!decodedToken) return res.status(400).send({ staus: false, msg: "Token is invalid" })
 
     const userId = req.params.userId
 
     // Authorization
     const userLoggedIn = decodedToken.user
-    if (userLoggedIn != userId) return res.send({ status: false, msg: "User loggedIn is not allowed to fetch the details" })
+    if (userLoggedIn != userId) return res.status(401).send({ status: false, msg: "User loggedIn is not allowed to fetch the details" })
 
     const userDetails = await userModel.findById(userId)
     // if(!userDetails) return res.send({staus : false, msg : "No such user present with these details"})
@@ -54,15 +54,15 @@ const getUserDetails = async function (req, res) {
 //4
 const updateUserDetail = async function (req, res) {
     const token = req.headers["x-auth-token"]
-    if (!token) return res.send({ status: false, msg: "Token must be present" })
+    if (!token) return res.status(400).send({ status: false, msg: "Token must be present" })
 
     const decodedToken = jwt.verify(token, "SecretCode")
-    if (!decodedToken) return res.send({ status: false, msg: "Token is invalid" })
+    if (!decodedToken) return res.status(400).send({ status: false, msg: "Token is invalid" })
 
     const userId = req.params.userId
     //Authorization
     const userLoggedIn = decodedToken.user
-    if (userLoggedIn != userId) return res.send({ status: false, msg: "User loggedIn is not allowed to update details" })
+    if (userLoggedIn != userId) return res.status(401).send({ status: false, msg: "User loggedIn is not allowed to update details" })
 
     const data = req.body
     const userDetails = await userModel.findOneAndUpdate({ _id: userId }, data, { new: true })
@@ -73,26 +73,39 @@ const updateUserDetail = async function (req, res) {
 //5
 const markAsDelete = async function (req, res) {
     const token = req.headers["x-auth-token"]
-    if (!token) return res.send({ status: false, msg: "Token must be present" })
+    if (!token) return res.status(400).send({ status: false, msg: "Token must be present" })
 
     const decodedToken = jwt.verify(token, "SecretCode")
-    if (!decodedToken) return res.send({ status: false, msg: "Token is invalid" })
+    if (!decodedToken) return res.status(400).send({ status: false, msg: "Token is invalid" })
 
     const userId = req.params.userId
     //Authorization
     const userLoggedIn = decodedToken.user
-    if (userLoggedIn != userId) return res.send({ status: false, msg: "User loggedIn is not allowed to update details" })
+    if (userLoggedIn != userId) return res.status(401).send({ status: false, msg: "User loggedIn is not allowed to update details" })
 
     const data = req.body
     const updateIsDelete = await userModel.findOneAndUpdate({ _id: userId }, data, { new: true })
     return res.send({ status: true, data: updateIsDelete })
+
+
+
+    module.exports.createUser = createUser
+    module.exports.loginUser = loginUser
+    module.exports.getUserDetails = getUserDetails
+    module.exports.updateUserDetail = updateUserDetail
+    module.exports.markAsDelete = markAsDelete
+
+
 }
 
-module.exports.createUser = createUser
-module.exports.loginUser = loginUser
-module.exports.getUserDetails = getUserDetails
-module.exports.updateUserDetail = updateUserDetail
-module.exports.markAsDelete = markAsDelete
+}
+catch(err){
+    res.status(500).send({msg:`Server side error described below.`, error : err.message})
+}
+
+
+
+
 
 
 
