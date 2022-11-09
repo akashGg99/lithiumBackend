@@ -3,8 +3,6 @@ const jwt = require("jsonwebtoken");
 
 
 
-try {
-
 //1
 const createUser = async function (req, res) {
     const data = req.body
@@ -89,28 +87,17 @@ const markAsDelete = async function (req, res) {
 
 
 
-    module.exports.createUser = createUser
-    module.exports.loginUser = loginUser
-    module.exports.getUserDetails = getUserDetails
-    module.exports.updateUserDetail = updateUserDetail
-    module.exports.markAsDelete = markAsDelete
-
-
-}
-
-}
-catch(err){
-    res.status(500).send({msg:`Server side error described below.`, error : err.message})
 }
 
 
 
 
 
-
-
-
-
+module.exports.createUser = createUser
+module.exports.loginUser = loginUser
+module.exports.getUserDetails = getUserDetails
+module.exports.updateUserDetail = updateUserDetail
+module.exports.markAsDelete = markAsDelete
 
 
 
