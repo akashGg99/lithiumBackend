@@ -9,7 +9,6 @@ const authenticate = function(req, req, next) {
     next()
 }
 
-
 const authorise = function(req, res, next) {
     // comapre the logged in user's id and the id in request
     const decodedToken = jwt.verify(token, "SecretCode")
@@ -27,10 +26,8 @@ module.exports.authorise = authorise
 
 }
 
-
-
-catch(err){
-    res.status(500).send({msg:`Server side error described below.`, error : err.message})
+catch(anything){
+    res.status(500).send({msg:`Server side error in Middleware described below.`, error : anything.message})
 }
 
 
