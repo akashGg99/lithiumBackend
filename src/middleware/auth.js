@@ -13,8 +13,8 @@ const authenticate = function(req, res, next) {
 
     }
 
-    catch(anything){
-        res.status(500).send({msg:`Server side error in Middleware described below.`, error : anything.message})
+    catch(err){
+        res.status(500).send({msg:`Server side error in Middleware described below.`, error : err.message})
     }
     
 }
