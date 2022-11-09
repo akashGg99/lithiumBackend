@@ -2,17 +2,23 @@ const userModel = require('../models/userModel')
 const jwt = require("jsonwebtoken");
 
 
-try{
 //1
 const createUser = async function (req, res) {
+    try{
     const data = req.body
     const savedData = await userModel.create(data)
     res.send({ status: true, data: savedData })
+    }
+    catch(anything){
+        res.status(500).send({msg:`Server side error described below.`, error : anything.message})
+    }
+    
 }
 
 
 //2
 const loginUser = async function (req, res) {
+    try{
     const email = req.body.email
     const password = req.body.password
     const user = await userModel.findOne({ email: email, password: password })
@@ -27,10 +33,15 @@ const loginUser = async function (req, res) {
         }, "SecretCode")
 
     res.send({ status: true, data: token })
+    }
+    catch(anything){
+        res.status(500).send({msg:`Server side error described below.`, error : anything.message})
+    }
 }
 
 //3
 const getUserDetails = async function (req, res) {
+    try{
     const token = req.headers["x-auth-token"]
     if (!token) return res.status(400).send({ status: false, msg: "Token must be present" })
 
@@ -47,10 +58,15 @@ const getUserDetails = async function (req, res) {
     // if(!userDetails) return res.send({staus : false, msg : "No such user present with these details"})
 
     return res.send({ status: true, data: userDetails })
+    }
+    catch(anything){
+        res.status(500).send({msg:`Server side error described below.`, error : anything.message})
+    }
 }
 
 //4
 const updateUserDetail = async function (req, res) {
+    try{
     const token = req.headers["x-auth-token"]
     if (!token) return res.status(400).send({ status: false, msg: "Token must be present" })
 
@@ -66,10 +82,15 @@ const updateUserDetail = async function (req, res) {
     const userDetails = await userModel.findOneAndUpdate({ _id: userId }, data, { new: true })
     // if(!userDetails) return res.send({status:false, msg : "No such user present with these details"})
     return res.send({ staus: true, data: userDetails })
+    }
+    catch(anything){
+        res.status(500).send({msg:`Server side error described below.`, error : anything.message})
+    }
 }
 
 //5
 const markAsDelete = async function (req, res) {
+    try{
     const token = req.headers["x-auth-token"]
     if (!token) return res.status(400).send({ status: false, msg: "Token must be present" })
 
@@ -84,8 +105,10 @@ const markAsDelete = async function (req, res) {
     const data = req.body
     const updateIsDelete = await userModel.findOneAndUpdate({ _id: userId }, data, { new: true })
     return res.send({ status: true, data: updateIsDelete })
-
-
+    }
+    catch(anything){
+        res.status(500).send({msg:`Server side error described below.`, error : anything.message})
+    }
 
 }
 
@@ -95,12 +118,6 @@ module.exports.loginUser = loginUser
 module.exports.getUserDetails = getUserDetails
 module.exports.updateUserDetail = updateUserDetail
 module.exports.markAsDelete = markAsDelete
-
-}
-
-catch(err){
-    res.status(500).send({msg:`Server side error in Middleware described below.`, error : err.message})
-}
 
 
 
