@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const CowinController= require("../controllers/cowinController")
+const weatherController= require("../controllers/weatherController")
 
 
 
@@ -8,9 +9,34 @@ router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
+//1
+router.get("/getByDist&Date", CowinController.getByDistrictandDate)
 
+//2
+//gets any city weather by query param
+router.get("/getAnyCityTemp", weatherController.getCityWeather)
+
+//to sort and store, same thing but post request to store data in db and sort
+router.post("/CityTemp", weatherController.getCityWeather)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//......Other Api examples..................
 router.get("/cowin/states", CowinController.getStates)
+
 router.get("/cowin/districtsInState/:stateId", CowinController.getDistricts)
+
 router.get("/cowin/getByPin", CowinController.getByPin)
 
 router.post("/cowin/getOtp", CowinController.getOtp)

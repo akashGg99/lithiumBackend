@@ -1,6 +1,41 @@
 let axios = require("axios")
+// const { options } = require("../routes/route")
 
 
+
+//1
+let getByDistrictandDate = async function(req,res){
+    try{
+        let data1 = req.query.district_id    //query param var is predecided by orignal author already
+        let data2= req.query.date
+        let option={
+                method: "get",
+                url:`https://cdndemo-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${data1}&date=${data2}`
+                }
+
+        let result = await axios(option)
+
+        res.status(200).send({status: true, outputData: result.data })   //result.data has the useful data in {result}
+    }
+    catch(err){
+                res.status(500).send({msg: err.message, location:"error In cowin controller"})
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//................................ Pritesh sir ka code Axios examples  ..................................
 let getStates = async function (req, res) {
 
     try {
@@ -79,7 +114,12 @@ let getOtp = async function (req, res) {
 }
 
 
+
+
+
+
 module.exports.getStates = getStates
 module.exports.getDistricts = getDistricts
 module.exports.getByPin = getByPin
 module.exports.getOtp = getOtp
+module.exports.getByDistrictandDate=getByDistrictandDate
