@@ -15,12 +15,8 @@ router.get("/getByDist&Date", CowinController.getByDistrictandDate)
 
 
 //2.
-//gets any city weather by query param
-router.get("/getAnyCityTemp", weatherController.getCityWeather)
-
-//to sort and store, same thing but post request to store data in db and sort
-router.post("/CityTemp", weatherController.getCityWeather)
-
+router.get("/getAnyCity", weatherController.getCityTemp) 
+router.post("/CityTemp", weatherController.getCitiesWeather)
 
 
 

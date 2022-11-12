@@ -30,6 +30,7 @@ W7d2-
 2.  GOTO  http://api.openweathermap.org => “subscribe” current weather data ==> get api key for Free version ==> create new account and Verify your emailId( Must verify to avoid issues) => go to My APi keys under your account name(top right corner) or https://home.openweathermap.org/api_keys => save the key/appid somewhere [Key:6207e944a25ac70fefa688e11a690105,Username:Akash123,Password:Akash123,company:Akash123]. 
 Now proceed further
 Create API's to do each of the following:
+
                     - get weather of London from http://api.openweathermap.org/data/2.5/weather?q=London&appid=<useYourOwnAppId> //apikey// 
                     (NOTE: must use HTTP infront of the url else axios will attempt to hit localhost and give error  ..also use HTTP only and not HTTPS)
 
