@@ -9,7 +9,7 @@ let memeList = async function(req,res){
                 }
 
         let result= await axios(option)
-        res.send({output:result.data})
+        res.send({output: result.data})
     }
     catch(err){
                 res.status(500).send({msg:err.message})
@@ -17,12 +17,14 @@ let memeList = async function(req,res){
 }
 
 
+
 let createMeme = async function(req,res){
     try{
-        let {tempelate_id,text0,text1,username,password}=req.query
+        let {template_id,text0,text1,username,password}=req.query
+
         let option={
-                    method:"get",
-                    url:`https://api.imgflip.com/caption_image?tempelate_id=${tempelate_id}&text0=${text0}&text1=${text1}&username=${username}&password=${password}`
+                    method:"post",
+                    url:`https://api.imgflip.com/caption_image?template_id=${template_id}&text0=${text0}&text1=${text1}&username=${username}&password=${password}`
                   }
         
         let result= await axios(option)
@@ -36,3 +38,4 @@ let createMeme = async function(req,res){
 
 
 module.exports.memeList=memeList
+module.exports.createMeme=createMeme

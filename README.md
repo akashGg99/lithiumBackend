@@ -1,3 +1,5 @@
+W7d2-
+
 # Promise has typically 3 states
 - Pending : not awaited and hence has not completed yet ( e.g. typically when you dont await an axios or db call)
 - Rejected: When promise failed ( wrong url | server down etc)
@@ -17,8 +19,13 @@
 // a short video ..4-5 mins  summary on what we covered today
 
 // An asignment :
+
 1.  WRITE A GET API TO GET THE LIST OF ALL THE "vaccination sessions by district id" for any given district id and for any given date
-    visit ApiSetu.gov for api route/url. (https://cdndemo-api.co-vin.in/api   )
+
+    <!-- visit ApiSetu.gov for api route/url. (https://cdndemo-api.co-vin.in/api   ) -->
+
+
+
 
 2.  GOTO  http://api.openweathermap.org => “subscribe” current weather data ==> get api key for Free version ==> create new account and Verify your emailId( Must verify to avoid issues) => go to My APi keys under your account name(top right corner) or https://home.openweathermap.org/api_keys => save the key/appid somewhere [Key:6207e944a25ac70fefa688e11a690105,Username:Akash123,Password:Akash123,company:Akash123]. 
 Now proceed further
@@ -27,7 +34,7 @@ Create API's to do each of the following:
                     (NOTE: must use HTTP infront of the url else axios will attempt to hit localhost and give error  ..also use HTTP only and not HTTPS)
 
                     - then change the above to get the temperature only( of London)
-                    
+
                     - Sort the cities  ["Bengaluru","Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"] in order of their increasing temperature
                     result should look something like this
                     [

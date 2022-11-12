@@ -10,11 +10,11 @@ router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
-//1.....
+//1.
 router.get("/getByDist&Date", CowinController.getByDistrictandDate)
 
 
-//2.....
+//2.
 //gets any city weather by query param
 router.get("/getAnyCityTemp", weatherController.getCityWeather)
 
@@ -23,10 +23,10 @@ router.post("/CityTemp", weatherController.getCityWeather)
 
 
 
-// 3.....
-router.get('/getMemelist',memeController.memeList)
 
-router.post('/getMemelist',memeController.memeList)
+//3.
+router.get('/getMemelist',memeController.memeList)
+router.post('/createMeme',memeController.createMeme)
 
 
 
